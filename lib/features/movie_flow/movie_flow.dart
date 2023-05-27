@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movie_recomm/features/movie_flow/genre/genre_screen.dart';
+import 'package:movie_recomm/features/movie_flow/landing/landing_screen.dart';
 
 class MovieFlow extends StatefulWidget {
   const MovieFlow({super.key});
@@ -17,7 +19,7 @@ class _MovieFlowState extends State<MovieFlow> {
     );
   }
 
-  void prevousPage() {
+  void previousPage() {
     pageController.previousPage(
       duration: const Duration(
         microseconds: 600,
@@ -36,8 +38,16 @@ class _MovieFlowState extends State<MovieFlow> {
   Widget build(BuildContext context) {
     return PageView(
       controller: pageController,
-      //physics: const NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       children: [
+        LandingScreen(
+          nextPage: nextPage,
+          previousPage: previousPage,
+        ),
+        GenreScreen(
+          nextPage: nextPage,
+          previousPage: previousPage,
+        ),
         Scaffold(
           body: Container(
             color: Colors.red,
