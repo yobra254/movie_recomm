@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:movie_recomm/core/constants.dart';
+import 'package:movie_recomm/core/widgets/primary_button.dart';
 import 'package:movie_recomm/features/movie_flow/genre/genre.dart';
+import 'package:movie_recomm/features/movie_flow/genre/list_card.dart';
 
 class GenreScreen extends StatefulWidget {
   const GenreScreen({
@@ -52,7 +55,29 @@ class _GenreScreenState extends State<GenreScreen> {
               'Let\s Start with genre',
               style: theme.textTheme.headline5,
               textAlign: TextAlign.center,
-            )
+            ),
+            Expanded(
+              child: ListView.separated(
+                padding: const EdgeInsets.symmetric(vertical: kListItemSpacing),
+                itemCount: genres.length,
+                itemBuilder: (context, index) {
+                  final genre = genres[index];
+                  return ListCard(
+                    genre: genre,
+                    onTap: () => toggleSelected(genre),
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const SizedBox(
+                    height: kMediumSpacing,
+                  );
+                },
+              ),
+            ),
+            PrimaryButton(onPressed: widget.nextPage, text: 'Continue'),
+            const SizedBox(
+              height: kMediumSpacing,
+            ),
           ],
         ),
       ),
